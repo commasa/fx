@@ -108,12 +108,11 @@ public class OandaRateApp extends MessageCracker implements Application {
 		}
 		this.symbols = symbolList;
 		reportsDao.open();
-
 	}
 
 	@Override
 	public void fromAdmin(Message message, SessionID sessionId) throws FieldNotFound, IncorrectDataFormat, IncorrectTagValue, RejectLogon {
-		log.info("fromAdmin : SessionID=" + sessionId.toString() + " , Message=" + message.getClass().getName());
+		log.debug("fromAdmin : SessionID=" + sessionId.toString() + " , Message=" + message.getClass().getName());
 	}
 
 	@Override
@@ -174,7 +173,7 @@ public class OandaRateApp extends MessageCracker implements Application {
 				}
 				message.setField(new ResetSeqNumFlag(true));
 			}
-			log.info("toAdmin : SessionID=" + sessionID.toString() + " , Message=" + message.getClass().getName());
+			log.debug("toAdmin : SessionID=" + sessionID.toString() + " , Message=" + message.getClass().getName());
 		} catch (Exception e) {
 			log.error("ERROR toAdmin : ", e);
 		}
@@ -182,7 +181,7 @@ public class OandaRateApp extends MessageCracker implements Application {
 
 	@Override
 	public void toApp(Message message, SessionID sessionId) throws DoNotSend {
-		log.info("toApp : SessionID=" + sessionId.toString() + " , Message=" + message.getClass().getName());
+		log.debug("toApp : SessionID=" + sessionId.toString() + " , Message=" + message.getClass().getName());
 	}
 
 	public void requestMarketData() throws SessionNotFound {

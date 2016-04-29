@@ -34,13 +34,13 @@ public class IntervalPriceResultDao extends AbstractDao {
 		ps.clearParameters();
 		ps.setString(1, tradeDate);
 		ps.setString(2, result.getSymbol());
-		ps.setDate(3, new java.sql.Date(result.getLast().getTime()));
+		ps.setTimestamp(3, new java.sql.Timestamp(result.getLast().getTime()));
 		ps.setString(4, result.getModel());
 		ps.setDouble(5, result.getVolatility());
 		ps.setDouble(6, result.getBuyPL());
 		ps.setDouble(7, result.getSellPL());
-		ps.setDate(8, new java.sql.Date(result.getBaseBegin().getTime()));
-		ps.setDate(9, new java.sql.Date(result.getBaseEnd().getTime()));
+		ps.setTimestamp(8, new java.sql.Timestamp(result.getBaseBegin().getTime()));
+		ps.setTimestamp(9, new java.sql.Timestamp(result.getBaseEnd().getTime()));
 		log.trace("executeUpdate(ipModel): "+result.toString());
 		super.executeUpdate(ps);
 	}

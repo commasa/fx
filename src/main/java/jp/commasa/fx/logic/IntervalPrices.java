@@ -35,6 +35,7 @@ public class IntervalPrices {
 		nextDate = null;
 		calNY.setTimeZone(TZ_NY);
 		sdfNY.setTimeZone(TZ_NY);
+		intervalPriceResultDao.open();
 	}
 	
 	protected boolean tradeSignal(Price price) {
@@ -140,7 +141,7 @@ public class IntervalPrices {
 	}
 	public boolean isOpen(Calendar cal) {
 		int h = cal.get(Calendar.HOUR_OF_DAY);
-		if ( h >= 7 && h < 9 ) {
+		if ( h >= 3 && h < 9 ) {
 			return false;
 		} else {
 			return true;
@@ -154,12 +155,11 @@ public class IntervalPrices {
 				if (tradeSignal(p)) {
 					IntervalPriceResult result = result(p.getSymbol(), (int)120/interval, (int)60/interval);
 					if (result != null) {
-						System.out.println(result.toString());
-//						try {
-//							intervalPriceResultDao.executeUpdate(tradeYMD, result);
-//						} catch (SQLException e) {
-//							log.error("INSERT IntervalPriceResult", e);
-//						}
+						try {
+							intervalPriceResultDao.executeUpdate(tradeYMD, result);
+						} catch (SQLException e) {
+							log.error("INSERT IntervalPriceResult", e);
+						}
 						//TODO モデルから注文条件を取得
 						//TODO 注文呼び出し
 					}
